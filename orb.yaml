@@ -1,0 +1,17 @@
+version: 2.1
+description: Persist environment variables between jobs.
+commands:
+  persist-env:
+    description: Persist all environment variables
+    steps:
+      - run: cp $BASH_ENV /tmp/.env-to-persist
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - .env-to-persist
+
+  attach-env:
+    steps:
+      - attach_workspace:
+          at: /tmp
+      - run: cat /tmp/.env-to-persist >> $BASH_ENV
