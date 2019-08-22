@@ -2,11 +2,12 @@ version: 2.1
 orbs:
   orb-tools: circleci/orb-tools@8.27
 workflows:
+
   deploy:
     jobs:
       - orb-tools/publish:
           name: publish-dev
-          orb-path: orb.yaml
+          orb-path: orb.yml
           orb-ref: christeredvartsen/persist-env@dev:${CIRCLE_BRANCH}
           publish-token-variable: ORB_PUBLISHING_TOKEN
           validate: true
@@ -15,7 +16,7 @@ workflows:
               ignore: /.*/
       - orb-tools/publish:
           name: publish-prod
-          orb-path: orb.yaml
+          orb-path: orb.yml
           orb-ref: christeredvartsen/persist-env@${CIRCLE_TAG}
           publish-token-variable: ORB_PUBLISHING_TOKEN
           validate: true
