@@ -41,7 +41,7 @@ commands:
           command: |
             for file in /tmp/.env-to-persist $BASH_ENV
             do
-              echo "export << parameters.var-name >>="<< parameters.var-value >>" >> $file"
+              echo "export << parameters.var-name >>="<< parameters.var-value >>"" >> $file
             done
 examples:
   set-env-var:
