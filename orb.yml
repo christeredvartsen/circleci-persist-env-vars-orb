@@ -38,7 +38,7 @@ commands:
           param: << parameters.var-value >>
       - run:
           name: Set environment variable
-          command: echo "export << parameters.var-name >>="<< parameters.var-value >>" >> /tmp/.env-to-persist
+          command: echo "export << parameters.var-name >>="<< parameters.var-value >>" >> /tmp/.env-to-persist"
 examples:
   set-env-var:
     description: Set an environment variable
