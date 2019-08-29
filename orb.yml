@@ -32,16 +32,12 @@ commands:
         type: string
         description: The value of the variable
     steps:
-      - orb-tools/check-env-var-param:
-          param: << parameters.var-name >>
-      - orb-tools/check-env-var-param:
-          param: << parameters.var-value >>
       - run:
           name: Set environment variable
           command: |
             for file in /tmp/.env-to-persist $BASH_ENV
             do
-              echo "export << parameters.var-name >>="<< parameters.var-value >>"" >> $file
+              echo "export << parameters.var-name >>=\"<< parameters.var-value >>\"" >> $file
             done
 examples:
   set-env-var:
@@ -103,6 +99,4 @@ examples:
                 requires:
                   - build
 description: Persist environment variables between jobs.
-orbs:
-  orb-tools: circleci/orb-tools@8.27
 version: 2.1
