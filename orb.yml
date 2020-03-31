@@ -1,26 +1,36 @@
 commands:
   persist-env:
     description: Persist all environment variables
+    parameters:
+      file-name:
+        type: string
+        description: The name of the file used for storage within the workspace
+        default: .env-to-persist
     steps:
       - run:
           name: Touch file
-          command: touch /tmp/.env-to-persist
+          command: touch /tmp/<< parameters.file-name >>
       - persist_to_workspace:
           root: /tmp
           paths:
-            - .env-to-persist
+            - << parameters.file-name >>
 
   attach-env:
     description: Attach the environment variables previously stored
+    parameters:
+      file-name:
+        type: string
+        description: The name of the file used for storage within the workspace
+        default: .env-to-persist
     steps:
       - attach_workspace:
           at: /tmp
       - run:
           name: Touch file
-          command: touch /tmp/.env-to-persist
+          command: touch /tmp/<< parameters.file-name >>
       - run:
           name: Append to bash environment file
-          command: cat /tmp/.env-to-persist >> $BASH_ENV
+          command: cat /tmp/<< parameters.file-name >> >> $BASH_ENV
 
   set-env-var:
     description: Set an environment variable
@@ -99,4 +109,4 @@ examples:
                 requires:
                   - build
 description: Persist environment variables between jobs.
-version: 2.1
+version: 2.2
