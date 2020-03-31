@@ -109,4 +109,4 @@ examples:
                 requires:
                   - build
 description: Persist environment variables between jobs.
-version: 2.2
+version: 2.1
